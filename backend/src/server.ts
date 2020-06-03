@@ -4,17 +4,37 @@
     - podemos usar o comando npm install @types/express para instalar essas definições, por exemplo
 */
 
-import express from 'express';
+import express, { response } from 'express';
 
 const app = express();
 
+const users = [
+    'Diego', // 0
+    'Cleiton', // 1
+    'Joãozinho', // 2
+];
+
 app.get('/users', (req, res) => {
     console.log('Listagem de Usuários');
-    res.json([
-        'Diego',
-        'Cleiton',
-        'Joãozinho',
-    ]);
+    return res.json(users);
 });
+
+app.get('/users/:pos', (req, res) => {
+    const pos = Number(req.params.pos);
+
+    const user = users[pos];
+
+    return res.json(user);
+});
+
+app.post('/users', (req, res) => {
+    console.log('POST usuários');
+    const user = {
+        name: 'Cláudia',
+        email: 'clau@gmail.com'
+    }
+
+    return res.json(user);
+})
 
 app.listen(3333);
