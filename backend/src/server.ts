@@ -5,36 +5,12 @@
 */
 
 import express, { response } from 'express';
+import routes from './routes';
 
 const app = express();
 
-const users = [
-    'Diego', // 0
-    'Cleiton', // 1
-    'Joãozinho', // 2
-];
+app.use(express.json()); // permite que o express passe a entender corpo de requisição com formatos JSON
 
-app.get('/users', (req, res) => {
-    console.log('Listagem de Usuários');
-    return res.json(users);
-});
-
-app.get('/users/:pos', (req, res) => {
-    const pos = Number(req.params.pos);
-
-    const user = users[pos];
-
-    return res.json(user);
-});
-
-app.post('/users', (req, res) => {
-    console.log('POST usuários');
-    const user = {
-        name: 'Cláudia',
-        email: 'clau@gmail.com'
-    }
-
-    return res.json(user);
-})
+app.use(routes); // faz com que o express use as rotas que separamos em outro arquivo de rotas
 
 app.listen(3333);
