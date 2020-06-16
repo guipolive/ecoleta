@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import api from '../../services/api';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
+import { Map, TileLayer, Marker } from 'react-leaflet';
 
 import logo from '../../assets/logo.svg';
 import './styles.css';
 
 const CreatePoint = () => {
+    useEffect(() => {
+        api.get('items').then(response => {
+            console.log(response);
+            
+        })
+    }, [])
+
     return (
         <div id="page-create-point">
             <header>
@@ -60,6 +69,15 @@ const CreatePoint = () => {
                         <h2>Endereço</h2>
                         <span>Selecione o endereço no mapa</span>
                     </legend>
+
+                    <Map center={[-15.811200, -47.987177]} zoom={15}>
+                        <TileLayer
+                            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+
+                        <Marker position={[-15.811200, -47.987177]} />
+                    </Map>
 
                     <div className="field-group">
                         <div className="field">
