@@ -42,7 +42,7 @@ const CreatePoint = () => {
 
     const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]); // declarando estado que guarda a posição inicial do usuário
 
-    const history = useHistory(); // guardando o histórico de urls
+    const history = useHistory(); // vai ser usado para enviar o usuário de volta pra home 
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(position => {
